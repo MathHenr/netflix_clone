@@ -27,5 +27,6 @@ module.exports = {
       'semi': false,
       'endOfLine': 'auto',
     }],
+    'react/prop-types': 'off'
   },
 }

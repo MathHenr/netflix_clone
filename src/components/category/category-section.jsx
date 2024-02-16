@@ -1,17 +1,72 @@
+import { useState } from 'react'
+
 import { MoviePoster } from '../movie poster/movie-poster'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 export function CategorySection({ item, posterPath }) {
-  return (
-    <div className="py-3 w-full min-h-[350px]">
-      <h1 className="text-lg sm:text-[30px] font-semibold px-[2%]">
-        {item.title}
-      </h1>
+  const [scrollX, setScrollX] = useState(0)
 
-      <div className="flex flex-1 w-full">
-        {item &&
-          item.items.results.map((movie) => (
-            <MoviePoster key={movie.id} movie={movie} posterPath={posterPath} />
-          ))}
+  function handleLeftArrow() {
+    let scrolling = scrollX + Math.round(window.innerWidth / 2)
+    if (scrolling > 0) {
+      scrolling = 0
+    }
+    setScrollX(scrolling)
+  }
+
+  function handleRightArrow() {
+    let scrolling = scrollX - Math.round(window.innerWidth / 2)
+    let listWidth = item.items.results.length * 250
+    if (window.innerWidth - listWidth > scrolling) {
+      // eslint-disable-next-line prettier/prettier
+      scrolling = (window.innerWidth - listWidth) - 40
+    }
+    setScrollX(scrolling)
+  }
+
+  return (
+    <div className="p-2 relative md:overflow-x-hidden overflow-x-auto">
+      <h1 className="text-[30px] font-bold"> {item.title} </h1>
+
+      <div
+        className="flex items-center group"
+        style={{
+          width: 20 * 250,
+        }}
+      >
+        {window.innerWidth > 768 && (
+          <>
+            <div
+              onClick={handleLeftArrow}
+              className="absolute h-[350px] left-[1%] z-10 flex items-center cursor-pointer px-[.5%] bg-[rgba(0,0,0,.3)] opacity-0 duration-300 group-hover:opacity-100"
+            >
+              <ChevronLeft className="size-[50px] text-slate-50" />
+            </div>
+
+            <div
+              onClick={handleRightArrow}
+              className="absolute h-[350px] right-[1%] z-10 flex items-center cursor-pointer px-[.5%] bg-[rgba(0,0,0,.3)] opacity-0 duration-300 group-hover:opacity-100"
+            >
+              <ChevronRight className="size-[50px] text-slate-50" />
+            </div>
+          </>
+        )}
+
+        <div
+          className="duration-500 transition-all"
+          style={{
+            marginLeft: scrollX,
+          }}
+        >
+          {item &&
+            item.items.results.map((movie) => (
+              <MoviePoster
+                key={movie.id}
+                movie={movie}
+                posterPath={posterPath}
+              />
+            ))}
+        </div>
       </div>
     </div>
   )

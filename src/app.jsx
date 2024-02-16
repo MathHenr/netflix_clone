@@ -21,10 +21,12 @@ export function App() {
     <div>
       <Navbar />
 
-      {itemsList &&
-        itemsList.map((item, index) => (
-          <CategorySection key={index} item={item} posterPath={image_url} />
-        ))}
+      <div className="flex flex-col gap-6">
+        {itemsList &&
+          itemsList.map((item, index) => (
+            <CategorySection key={index} item={item} posterPath={image_url} />
+          ))}
+      </div>
 
       <Footer />
     </div>

@@ -12,7 +12,7 @@ export async function getMovieList() {
   return [
     {
       tag: 'originalsNetflix',
-      title: 'Séries Originais da Netflix',
+      title: 'Originais Netflix',
       items: await fetchMovie(
         `/discover/tv?with_networks=213&sort_by=vote_count.desc&language=pt-BR&api_key=${api_key}`,
       ),

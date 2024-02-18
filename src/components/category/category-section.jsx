@@ -25,7 +25,7 @@ export function CategorySection({ item, posterPath }) {
   }
 
   return (
-    <div className="p-2 relative md:overflow-x-hidden overflow-x-auto">
+    <div className="p-2 relative overflow-x-hidden">
       <h1 className="text-[30px] font-bold"> {item.title} </h1>
 
       <div
@@ -34,23 +34,19 @@ export function CategorySection({ item, posterPath }) {
           width: 20 * 250,
         }}
       >
-        {window.innerWidth > 768 && (
-          <>
-            <div
-              onClick={handleLeftArrow}
-              className="absolute h-[350px] left-[1%] z-10 flex items-center cursor-pointer px-[.5%] bg-[rgba(0,0,0,.3)] opacity-0 duration-300 group-hover:opacity-100"
-            >
-              <ChevronLeft className="size-[50px] text-slate-50" />
-            </div>
+        <div
+          onClick={handleLeftArrow}
+          className="absolute h-[80%] left-[1%] z-10 flex items-center cursor-pointer px-[.5%] bg-[rgba(0,0,0,.3)] sm:opacity-100 md:opacity-0 duration-300 group-hover:opacity-100"
+        >
+          <ChevronLeft className="size-[50px] text-slate-50" />
+        </div>
 
-            <div
-              onClick={handleRightArrow}
-              className="absolute h-[350px] right-[1%] z-10 flex items-center cursor-pointer px-[.5%] bg-[rgba(0,0,0,.3)] opacity-0 duration-300 group-hover:opacity-100"
-            >
-              <ChevronRight className="size-[50px] text-slate-50" />
-            </div>
-          </>
-        )}
+        <div
+          onClick={handleRightArrow}
+          className="absolute h-[80%] right-[1%] z-10 flex items-center cursor-pointer px-[.5%] bg-[rgba(0,0,0,.3)] sm:opacity-100 md:opacity-0 duration-300 group-hover:opacity-100"
+        >
+          <ChevronRight className="size-[50px] text-slate-50" />
+        </div>
 
         <div
           className="duration-500 transition-all"
@@ -62,6 +58,7 @@ export function CategorySection({ item, posterPath }) {
             item.items.results.map((movie) => (
               <MoviePoster
                 key={movie.id}
+                type={item.type}
                 movie={movie}
                 posterPath={posterPath}
               />

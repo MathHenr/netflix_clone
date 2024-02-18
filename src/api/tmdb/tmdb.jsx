@@ -1,6 +1,7 @@
 const api_key = 'b5ef61d288d7dac66d35a86961e72641'
 const api_url = 'https://api.themoviedb.org/3'
 export const image_url = 'https://image.tmdb.org/t/p/w300'
+export const video_url = 'https://www.youtube.com/watch?v='
 
 async function fetchMovie(endpoint) {
   const res = await fetch(api_url + endpoint)
@@ -16,6 +17,7 @@ export async function getMovieList() {
       items: await fetchMovie(
         `/discover/tv?with_networks=213&sort_by=vote_count.desc&language=pt-BR&api_key=${api_key}`,
       ),
+      type: 'tv',
     },
     {
       tag: 'toprated',
@@ -23,6 +25,7 @@ export async function getMovieList() {
       items: await fetchMovie(
         `/tv/top_rated?&language=pt-BR&api_key=${api_key}`,
       ),
+      type: 'tv',
     },
     {
       tag: 'recommended',
@@ -30,6 +33,7 @@ export async function getMovieList() {
       items: await fetchMovie(
         `/trending/all/week?language=pt-BR&api_key=${api_key}`,
       ),
+      type: 'movie',
     },
     {
       tag: 'adventure',
@@ -37,6 +41,7 @@ export async function getMovieList() {
       items: await fetchMovie(
         `/discover/movie?&with_genres=12&language=pt-BR&api_key=${api_key}`,
       ),
+      type: 'movie',
     },
     {
       tag: 'action',
@@ -44,6 +49,7 @@ export async function getMovieList() {
       items: await fetchMovie(
         `/discover/movie?&with_genres=28&language=pt-BR&api_key=${api_key}`,
       ),
+      type: 'movie',
     },
     {
       tag: 'animation',
@@ -51,6 +57,7 @@ export async function getMovieList() {
       items: await fetchMovie(
         `/discover/movie?&with_genres=16&language=pt-BR&api_key=${api_key}`,
       ),
+      type: 'movie',
     },
     {
       tag: 'comedy',
@@ -58,6 +65,7 @@ export async function getMovieList() {
       items: await fetchMovie(
         `/discover/movie?&with_genres=35&language=pt-BR&api_key=${api_key}`,
       ),
+      type: 'movie',
     },
     {
       tag: 'romance',
@@ -65,6 +73,7 @@ export async function getMovieList() {
       items: await fetchMovie(
         `/discover/movie?&with_genres=10749&language=pt-BR&api_key=${api_key}`,
       ),
+      type: 'movie',
     },
     {
       tag: 'horror',
@@ -72,6 +81,7 @@ export async function getMovieList() {
       items: await fetchMovie(
         `/discover/movie?&with_genres=27&language=pt-BR&api_key=${api_key}`,
       ),
+      type: 'movie',
     },
   ]
 }

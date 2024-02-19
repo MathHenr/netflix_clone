@@ -24,7 +24,7 @@ export function MoviePoster({ movie, type, posterPath }) {
 
       <Dialog.Portal>
         <Dialog.Overlay className="inset-0 bg-black/60 fixed shadow-lg shadow-white" />
-        <Dialog.Content className="inset-auto z-20 overflow-y-auto outline-none fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3/5 h-[90vh] bg-zinc-900 rounded-md">
+        <Dialog.Content className="inset-auto z-40 overflow-y-auto outline-none fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3/5 h-[90vh] bg-zinc-900 rounded-md">
           <div className="w-full z-20 absolute flex p-2 justify-end">
             <Dialog.Close className="bg-black/50 size-8 rounded-[50%] flex items-center justify-center duration-200 hover:bg-black/100">
               <X />

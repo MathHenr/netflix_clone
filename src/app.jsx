@@ -21,7 +21,11 @@ export function App() {
     <div>
       <Navbar />
 
-      <div className="flex flex-col gap-6">
+      <div className="w-full h-[95vh] text-[100px] flex items-center justify-center bg-gray-500">
+        Video Princiapl aqui
+      </div>
+
+      <div className="-my-28 flex flex-col gap-6">
         {itemsList &&
           itemsList.map((item, index) => (
             <CategorySection key={index} item={item} posterPath={image_url} />

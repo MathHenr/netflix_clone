@@ -4,9 +4,14 @@ export const image_url = 'https://image.tmdb.org/t/p/w300'
 export const backdrop_url = 'https://image.tmdb.org/t/p/original'
 
 async function fetchMovie(endpoint) {
-  const res = await fetch(api_url + endpoint)
-  const json = await res.json()
-  return json
+  try {
+    const res = await fetch(api_url + endpoint)
+    const json = await res.json()
+    return json
+  } catch (error) {
+    console.log(error)
+    return
+  }
 }
 
 export async function getMovieList() {
@@ -91,20 +96,30 @@ export async function getTrailerData(type, id) {
   let trailer = null
   switch (type) {
     case 'tv':
-      // eslint-disable-next-line no-case-declarations
-      trailerData = await fetchMovie(
-        // eslint-disable-next-line prettier/prettier
+      try {
+        // eslint-disable-next-line no-case-declarations
+        trailerData = await fetchMovie(
+          // eslint-disable-next-line prettier/prettier
         `/tv/${id}/videos?language=pt-br&api_key=${api_key}`
-      )
-      trailer = await getTrailer(trailerData)
-      return trailer
+        )
+        trailer = await getTrailer(trailerData)
+        return trailer
+      } catch (error) {
+        console.log(error)
+        break
+      }
     case 'movie':
-      trailerData = await fetchMovie(
-        // eslint-disable-next-line prettier/prettier
-        `/movie/${id}/videos?language=pt-br&api_key=${api_key}`
-      )
-      trailer = await getTrailer(trailerData)
-      return trailer
+      try {
+        trailerData = await fetchMovie(
+          // eslint-disable-next-line prettier/prettier
+          `/movie/${id}/videos?language=pt-br&api_key=${api_key}`
+        )
+        trailer = await getTrailer(trailerData)
+        return trailer
+      } catch (error) {
+        console.log(error)
+        break
+      }
     default:
       return
   }

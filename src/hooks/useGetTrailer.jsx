@@ -6,19 +6,24 @@ export const useGetTrailer = () => {
   const [firstTrailer, setFirstTrailer] = useState(null)
 
   const loadTrailerInfo = async (type, id) => {
-    const trailerInfo = await getTrailerData(type, id)
-    if (trailerInfo) {
-      let trailerQuery = []
-      for (let i = 0; i < trailerInfo.length; i++) {
-        trailerQuery[i] = trailerInfo[i].key
+    try {
+      const trailerInfo = await getTrailerData(type, id)
+      if (trailerInfo) {
+        let trailerQuery = []
+        for (let i = 0; i <= trailerInfo.length; i++) {
+          trailerQuery[i] = trailerInfo[i].key
+        }
+        const firstVideo = trailerQuery.shift()
+        setFirstTrailer(firstVideo)
+        setTrailer(trailerQuery)
+        trailerQuery = trailerQuery.join(',')
+        return setTrailer(trailerQuery)
       }
-      const firstVideo = trailerQuery.shift()
-      setFirstTrailer(firstVideo)
-      setTrailer(trailerQuery)
-      trailerQuery = trailerQuery.join(',')
-      return setTrailer(trailerQuery)
+      return
+    } catch (error) {
+      console.log(error)
+      return
     }
-    return
   }
 
   return { trailer, firstTrailer, loadTrailerInfo }

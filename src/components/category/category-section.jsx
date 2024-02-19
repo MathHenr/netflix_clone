@@ -38,14 +38,14 @@ export function CategorySection({ item, posterPath }) {
           onClick={handleLeftArrow}
           className="absolute h-[80%] left-[1%] z-10 flex items-center cursor-pointer px-[.5%] bg-[rgba(0,0,0,.3)] sm:opacity-100 md:opacity-0 duration-300 group-hover:opacity-100"
         >
-          <ChevronLeft className="size-[50px] text-slate-50" />
+          <ChevronLeft className="size-[50px] text-zinc-50" />
         </div>
 
         <div
           onClick={handleRightArrow}
           className="absolute h-[80%] right-[1%] z-10 flex items-center cursor-pointer px-[.5%] bg-[rgba(0,0,0,.3)] sm:opacity-100 md:opacity-0 duration-300 group-hover:opacity-100"
         >
-          <ChevronRight className="size-[50px] text-slate-50" />
+          <ChevronRight className="size-[50px] text-zinc-50" />
         </div>
 
         <div

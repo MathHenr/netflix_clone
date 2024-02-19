@@ -4,12 +4,12 @@
 
 @layer components {
   .backdrop-path-gradient-top {
-    background: rgb(15,23,42);
-    background: linear-gradient(0deg, rgba(15,23,42,1) 0%, rgba(15,23,42,1) 7%, rgba(15,23,42,0) 100%);
+    background: rgb(24,24,27);
+    background: linear-gradient(0deg, rgba(24,24,27,1) 0%, rgba(24,24,27,1) 7%, rgba(24,24,27,0) 100%);
   }
   .trailer-gradient-top {
-    background: rgb(15,23,42);
-    background: linear-gradient(0deg, rgba(15,23,42,1) 0%, rgba(15,23,42,.5) 5%, rgba(15,23,42,0) 15%, rgba(15,23,42,0) 100%);
+    background: rgb(24,24,27);
+    background: linear-gradient(0deg, rgba(24,24,27,1) 0%, rgba(24,24,27,.7) 3%, rgba(24,24,27,.3) 15%, rgba(24,24,27,0) 100%);
   }
 
 }

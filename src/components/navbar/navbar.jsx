@@ -9,7 +9,7 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="bg-slate-950 text-slate-900 flex justify-between px-10 items-center py-5 w-[100%] relative z-10">
+      <nav className="bg-zinc-950 flex justify-between px-10 items-center py-5 w-[100%] relative z-10">
         <div className="flex items-center justify-between w-full">
           <h2>
             <img
@@ -19,7 +19,7 @@ export function Navbar() {
             />
           </h2>
           {windowWidth > 700 ? (
-            <ul className="flex gap-3 text-slate-50">
+            <ul className="flex gap-3 text-zinc-50">
               <li>
                 <a href="#">Series</a>
               </li>
@@ -31,7 +31,7 @@ export function Navbar() {
               </li>
             </ul>
           ) : (
-            <Menu className="text-slate-50" />
+            <Menu className="text-zinc-50" />
           )}
         </div>
       </nav>

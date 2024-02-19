@@ -24,7 +24,7 @@ export function MoviePoster({ movie, type, posterPath }) {
 
       <Dialog.Portal>
         <Dialog.Overlay className="inset-0 bg-black/60 fixed shadow-lg shadow-white" />
-        <Dialog.Content className="inset-auto z-20 overflow-y-auto outline-none fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3/5 h-[90vh] bg-slate-900 rounded-md">
+        <Dialog.Content className="inset-auto z-20 overflow-y-auto outline-none fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3/5 h-[90vh] bg-zinc-900 rounded-md">
           <div className="w-full z-20 absolute flex p-2 justify-end">
             <Dialog.Close className="bg-black/50 size-8 rounded-[50%] flex items-center justify-center duration-200 hover:bg-black/100">
               <X />
@@ -32,19 +32,19 @@ export function MoviePoster({ movie, type, posterPath }) {
           </div>
           <div className="w-full">
             {trailer ? (
-              <div className="w-full h-[65vh] flex items-center justify-center shadow-sm">
-                <div className="absolute w-full h-[65vh] trailer-gradient-top pointer-events-none" />
+              <div className="w-full h-[40vh] sm:h-[65vh] flex items-center justify-center shadow-sm">
+                <div className="absolute w-full h-[40vh] sm:h-[65vh] trailer-gradient-top pointer-events-none" />
                 <iframe
-                  className="w-full h-[65vh] rounded-md shadow-sm"
+                  className="w-full h-[40vh] sm:h-[65vh] rounded-md shadow-sm"
                   src={`https://www.youtube.com/embed/${firstTrailer}?playlist=${trailer}&autoplay=1&controls=0`}
                   allow="accelerometer; fullscreen; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;"
                 ></iframe>
               </div>
             ) : firstTrailer ? (
-              <div className="w-full h-[65vh] flex items-center justify-center shadow-sm">
-                <div className="absolute w-full h-[65vh] trailer-gradient-top pointer-events-none" />
+              <div className="w-full h-[40vh] sm:h-[65vh] flex items-center justify-center shadow-sm">
+                <div className="absolute w-full h-[40vh] sm:h-[65vh] trailer-gradient-top pointer-events-none" />
                 <iframe
-                  className="w-full h-[65vh] rounded-md shadow-sm"
+                  className="w-full h-[40vh] sm:h-[65vh] rounded-md shadow-sm"
                   src={`https://www.youtube.com/embed/${firstTrailer}?autoplay=1&controls=0`}
                   allow="accelerometer; fullscreen; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;"
                 ></iframe>

@@ -10,14 +10,14 @@ export const useGetTrailer = () => {
       const trailerInfo = await getTrailerData(type, id)
       if (trailerInfo) {
         let trailerQuery = []
-        for (let i = 0; i <= trailerInfo.length; i++) {
+        for (let i = 0; i < trailerInfo.length; i++) {
           trailerQuery[i] = trailerInfo[i].key
         }
         const firstVideo = trailerQuery.shift()
         setFirstTrailer(firstVideo)
-        setTrailer(trailerQuery)
         trailerQuery = trailerQuery.join(',')
-        return setTrailer(trailerQuery)
+        setTrailer(trailerQuery)
+        return
       }
       return
     } catch (error) {

@@ -36,7 +36,7 @@ export function MoviePoster({ movie, type, posterPath }) {
           </div>
 
           <div className="w-full h-[70%]">
-            {trailer ? (
+            {trailer && (
               <div className="w-full h-full flex items-center justify-center shadow-sm">
                 <iframe
                   className="w-full h-full rounded-md shadow-sm"
@@ -44,7 +44,17 @@ export function MoviePoster({ movie, type, posterPath }) {
                   allow="accelerometer; fullscreen; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;"
                 ></iframe>
               </div>
-            ) : (
+            )}
+            {firstTrailer && (
+              <div className="w-full h-full flex items-center justify-center shadow-sm">
+                <iframe
+                  className="w-full h-full rounded-md shadow-sm"
+                  src={`https://www.youtube.com/embed/${firstTrailer}?autoplay=1&controls=0`}
+                  allow="accelerometer; fullscreen; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;"
+                ></iframe>
+              </div>
+            )}
+            {!trailer && !firstTrailer && (
               <div className="w-full h-full flex items-center justify-center relative shadow-sm">
                 <div className="absolute w-full h-full backdrop-path-gradient-left shadow-sm" />
                 <div className="absolute w-full h-full backdrop-path-gradient-right shadow-sm" />

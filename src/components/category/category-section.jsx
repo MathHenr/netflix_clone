@@ -55,10 +55,21 @@ export function CategorySection({ item, posterPath }) {
           }}
         >
           {item &&
+            item.tag !== 'recommended' &&
             item.items.results.map((movie) => (
               <MoviePoster
                 key={movie.id}
                 type={item.type}
+                movie={movie}
+                posterPath={posterPath}
+              />
+            ))}
+          {item &&
+            item.tag === 'recommended' &&
+            item.items.results.map((movie) => (
+              <MoviePoster
+                key={movie.id}
+                type={movie.media_type}
                 movie={movie}
                 posterPath={posterPath}
               />

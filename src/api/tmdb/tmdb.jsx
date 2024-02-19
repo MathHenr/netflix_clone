@@ -141,3 +141,32 @@ const getTrailer = (trailerData) => {
   })
   return getOfficialItems.length > 0 ? getOfficialItems : null
 }
+
+export const getMovieDetails = async (id, type) => {
+  switch (type) {
+    case 'tv':
+      try {
+        const tvDetails = await fetchMovie(
+          // eslint-disable-next-line prettier/prettier
+          `/tv/${id}?language=pt-br&api_key=${api_key}`
+        )
+        return tvDetails
+      } catch (error) {
+        console.log(error)
+        break
+      }
+    case 'movie':
+      try {
+        const movieDetails = await fetchMovie(
+          // eslint-disable-next-line prettier/prettier
+            `/movie/${id}?language=pt-br&api_key=${api_key}`
+        )
+        return movieDetails
+      } catch (error) {
+        console.log(error)
+        break
+      }
+    default:
+      return null
+  }
+}

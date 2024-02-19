@@ -3,6 +3,8 @@ import { X } from 'lucide-react'
 import { useGetTrailer } from '../../hooks/useGetTrailer'
 import { backdrop_url } from '../../api/tmdb/tmdb'
 
+import { MoviePosterComponents } from '../movie poster components/movie-poster-components'
+
 export function MoviePoster({ movie, type, posterPath }) {
   const { trailer, firstTrailer, loadTrailerInfo } = useGetTrailer()
 
@@ -33,7 +35,7 @@ export function MoviePoster({ movie, type, posterPath }) {
           <div className="w-full">
             {trailer ? (
               <div className="w-full h-[40vh] sm:h-[65vh] flex items-center justify-center shadow-sm">
-                <div className="absolute w-full h-[40vh] sm:h-[65vh] trailer-gradient-top pointer-events-none" />
+                <div className="absolute w-full h-[40vh] sm:h-[66vh] trailer-gradient-top pointer-events-none" />
                 <iframe
                   className="w-full h-[40vh] sm:h-[65vh] rounded-md shadow-sm"
                   src={`https://www.youtube.com/embed/${firstTrailer}?playlist=${trailer}&autoplay=1&controls=0`}
@@ -42,7 +44,7 @@ export function MoviePoster({ movie, type, posterPath }) {
               </div>
             ) : firstTrailer ? (
               <div className="w-full h-[40vh] sm:h-[65vh] flex items-center justify-center shadow-sm">
-                <div className="absolute w-full h-[40vh] sm:h-[65vh] trailer-gradient-top pointer-events-none" />
+                <div className="absolute w-full h-[40vh] sm:h-[66vh] trailer-gradient-top pointer-events-none" />
                 <iframe
                   className="w-full h-[40vh] sm:h-[65vh] rounded-md shadow-sm"
                   src={`https://www.youtube.com/embed/${firstTrailer}?autoplay=1&controls=0`}
@@ -60,12 +62,7 @@ export function MoviePoster({ movie, type, posterPath }) {
               </div>
             )}
 
-            <div className="my-12 px-6 flex flex-col space-y-6">
-              <h1 className="text-slate-50 text-[28px] font-bold">
-                {type === 'tv' ? movie.name : movie.title}
-              </h1>
-              <h1 className="text-lg font-semibold">Temporadas</h1>
-            </div>
+            <MoviePosterComponents type={type} movie={movie} />
           </div>
         </Dialog.Content>
       </Dialog.Portal>

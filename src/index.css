@@ -3,12 +3,13 @@
 @tailwind utilities;
 
 @layer components {
-  .backdrop-path-gradient-left {
+  .backdrop-path-gradient-top {
     background: rgb(15,23,42);
-    background: linear-gradient(90deg, rgba(15,23,42,1) 0%, rgba(15,23,42,.97) 7%, rgba(15,23,42,0) 100%);
+    background: linear-gradient(0deg, rgba(15,23,42,1) 0%, rgba(15,23,42,1) 7%, rgba(15,23,42,0) 100%);
   }
-  .backdrop-path-gradient-right {
-    background: rgb(51,83,85);
-    background: linear-gradient(90deg, rgba(51,83,85,0) 0%, rgba(15,23,42,0) 98%, rgba(15,23,42,1) 100%);
+  .trailer-gradient-top {
+    background: rgb(15,23,42);
+    background: linear-gradient(0deg, rgba(15,23,42,1) 0%, rgba(15,23,42,.5) 5%, rgba(15,23,42,0) 100%);
   }
+
 }

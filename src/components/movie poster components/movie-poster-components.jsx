@@ -1,6 +1,8 @@
 import { OverviewComponent } from './overview-component/overview-component'
 import { TimeStampComponent } from './timestamp-component/timestamp-component'
 import { CreditsComponents } from './credits-components/credits-components'
+import { EpisodeComponets } from './episode seasons components/episode-components'
+import { Similiar } from './similar component/similar'
 
 export function MoviePosterComponents({ type, movie }) {
   return (
@@ -16,14 +18,7 @@ export function MoviePosterComponents({ type, movie }) {
 
       <OverviewComponent overview={movie.overview} />
 
-      <div className="col-span-3 flex items-center justify-between px-2">
-        <h1 className="text-[28px] font-medium">Episódios</h1>
-        <select className="text-zinc-950 outline-none px-2 py-px rounded-sm">
-          <option value="temporada1">Temporada 1</option>
-          <option value="temporada1">Temporada 2</option>
-          <option value="temporada1">Temporada 3</option>
-        </select>
-      </div>
+      {type === 'tv' ? <EpisodeComponets /> : <Similiar />}
     </div>
   )
 }

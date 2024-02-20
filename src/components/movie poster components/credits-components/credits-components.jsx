@@ -14,21 +14,23 @@ export function CreditsComponents({ type, movie }) {
     }
     load()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [movie])
+  }, [movie, type])
 
   return (
     <div className="col-span-1 row-span-2 flex flex-col items-start space-y-2  px-2">
-      <p>
-        <span className="font-medium">Elenco :</span>
-        {cast &&
-          cast.map((caster, index) => (
-            <span className="font-medium text-zinc-300" key={index}>
-              {' '}
-              {caster},{' '}
-            </span>
-          ))}
-        ...
-      </p>
+      {cast && cast.length > 1 && (
+        <p>
+          <span className="font-medium">Elenco :</span>
+          {cast &&
+            cast.map((caster, index) => (
+              <span className="font-medium text-zinc-300" key={index}>
+                {' '}
+                {caster},{' '}
+              </span>
+            ))}
+          ...
+        </p>
+      )}
       <p>
         <span className="font-medium">Genêros :</span>
         {genres &&

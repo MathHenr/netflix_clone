@@ -142,7 +142,7 @@ const getTrailer = (trailerData) => {
   return getOfficialItems.length > 0 ? getOfficialItems : null
 }
 
-export const getMovieDetails = async (id, type) => {
+export const getMovieDetails = async (type, id) => {
   switch (type) {
     case 'tv':
       try {
@@ -171,7 +171,7 @@ export const getMovieDetails = async (id, type) => {
   }
 }
 
-export const getCrewDetails = async (id, type) => {
+export const getCastDetails = async (type, id) => {
   switch (type) {
     case 'tv':
       try {

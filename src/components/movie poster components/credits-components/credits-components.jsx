@@ -1,16 +1,13 @@
 import { useEffect } from 'react'
-import { useGetCastMovie } from '../../../hooks/useGetCastMovie'
-import { useGetMovieDetails } from '../../../hooks/useGetMovieDetails'
+import { useMovie } from '../../../hooks/useMovie'
 
 export function CreditsComponents({ type, movie }) {
-  const { cast, loadCrewMovieDetails } = useGetCastMovie()
-  const { genres, loadMovieDetails } = useGetMovieDetails()
+  const { genres, cast, getMovie } = useMovie()
 
   // getting 4 casters and genres
   useEffect(() => {
     async function load() {
-      await loadCrewMovieDetails(type, movie.id)
-      await loadMovieDetails(type, movie.id)
+      await getMovie(type, movie.id)
     }
     load()
     // eslint-disable-next-line react-hooks/exhaustive-deps

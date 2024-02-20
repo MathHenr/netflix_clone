@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
-import { useGetMovieDetails } from '../../../hooks/useGetMovieDetails'
+import { useMovie } from '../../../hooks/useMovie'
 
 export function TimeStampComponent({ type, movie }) {
-  const { runtime, loadMovieDetails } = useGetMovieDetails()
+  const { runtime, getMovie } = useMovie()
 
   useEffect(() => {
     const loadRuntime = async () => {
-      await loadMovieDetails(type, movie.id)
+      await getMovie(type, movie.id)
     }
     loadRuntime()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -26,7 +26,7 @@ export function TimeStampComponent({ type, movie }) {
           {runtime > 1 ? `${runtime} Temporadas` : `${runtime} Temporada`}{' '}
         </p>
       ) : (
-        <p className="font-semibold"> {runtime}</p>
+        <p className="font-semibold"> {runtime} </p>
       )}
     </div>
   )

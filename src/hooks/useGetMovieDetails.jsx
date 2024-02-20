@@ -3,20 +3,38 @@ import { getMovieDetails } from '../api/tmdb/tmdb'
 
 export const useGetMovieDetails = () => {
   const [runtime, setRuntime] = useState(undefined)
+  const [genres, setGenres] = useState([])
 
   const loadMovieDetails = async (type, id) => {
     try {
       const movieDetails = await getMovieDetails(id, type)
       if (type === 'tv') {
-        return setRuntime(movieDetails.number_of_seasons)
+        setRuntime(movieDetails.number_of_seasons)
+
+        const arrayGenres = arrayOfGenres(movieDetails.genres)
+        setGenres(arrayGenres)
+        return
       } else if (type === 'movie') {
         const runtimeMovie = convertMinutesToHours(movieDetails.runtime)
-        return setRuntime(runtimeMovie)
+        setRuntime(runtimeMovie)
+
+        const arrayGenres = arrayOfGenres(movieDetails.genres)
+        setGenres(arrayGenres)
+        return
       }
     } catch (error) {
       console.log(error)
       return null
     }
+    return
+  }
+
+  function arrayOfGenres(obj) {
+    const genresArr = []
+    for (let i = 0; i < obj.length; i++) {
+      genresArr[i] = obj[i].name
+    }
+    return genresArr
   }
 
   function convertMinutesToHours(minutesRuntime) {
@@ -25,5 +43,5 @@ export const useGetMovieDetails = () => {
     return `${Math.floor(hours)}h ${Math.round(minutes)}min`
   }
 
-  return { runtime, loadMovieDetails }
+  return { runtime, genres, loadMovieDetails }
 }

@@ -170,3 +170,32 @@ export const getMovieDetails = async (id, type) => {
       return null
   }
 }
+
+export const getCrewDetails = async (id, type) => {
+  switch (type) {
+    case 'tv':
+      try {
+        const tvDetails = await fetchMovie(
+          // eslint-disable-next-line prettier/prettier
+          `/tv/${id}/credits?language=pt-br&api_key=${api_key}`
+        )
+        return tvDetails
+      } catch (error) {
+        console.log(error)
+        break
+      }
+    case 'movie':
+      try {
+        const movieDetails = await fetchMovie(
+          // eslint-disable-next-line prettier/prettier
+            `/movie/${id}/credits?language=pt-br&api_key=${api_key}`
+        )
+        return movieDetails
+      } catch (error) {
+        console.log(error)
+        break
+      }
+    default:
+      return null
+  }
+}

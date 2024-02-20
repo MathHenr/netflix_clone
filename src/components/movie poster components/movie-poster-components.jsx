@@ -1,5 +1,6 @@
 import { OverviewComponent } from './overview-component/overview-component'
 import { TimeStampComponent } from './timestamp-component/timestamp-component'
+import { CreditsComponents } from './credits-components/credits-components'
 
 export function MoviePosterComponents({ type, movie }) {
   return (
@@ -11,14 +12,7 @@ export function MoviePosterComponents({ type, movie }) {
       {/* Timestamp component to show when the movie/tv where released */}
       <TimeStampComponent type={type} movie={movie} />
 
-      <div className="col-span-1 row-span-2 flex flex-col items-start space-y-2  px-2">
-        <p>
-          Elenco: <span>EU</span>
-        </p>
-        <p>
-          Genêros: <span>Misterio</span>
-        </p>
-      </div>
+      <CreditsComponents type={type} movie={movie} />
 
       <OverviewComponent overview={movie.overview} />
 

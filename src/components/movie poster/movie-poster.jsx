@@ -4,17 +4,24 @@ import { useGetTrailer } from '../../hooks/useGetTrailer'
 import { backdrop_url } from '../../api/tmdb/tmdb'
 
 import { MoviePosterComponents } from '../movie poster components/movie-poster-components'
+import { useEffect } from 'react'
 
 export function MoviePoster({ movie, type, posterPath }) {
   const { trailer, firstTrailer, loadTrailerInfo } = useGetTrailer()
 
+  useEffect(() => {
+    async function load() {
+      await loadTrailerInfo(type, movie.id)
+      return
+    }
+    load()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [movie, type])
+
   return (
     <Dialog.Root>
       <div className="inline-block w-[250px] p-2">
-        <Dialog.Trigger
-          onClick={() => loadTrailerInfo(type, movie.id)}
-          href="#"
-        >
+        <Dialog.Trigger href="#">
           <img
             className="rounded-sm scale-95 hover:scale-105 duration-300 shadow-sm cursor-pointer "
             src={posterPath + movie.poster_path}

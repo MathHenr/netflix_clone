@@ -3,6 +3,7 @@ import { TimeStampComponent } from './timestamp-component/timestamp-component'
 import { CreditsComponents } from './credits-components/credits-components'
 import { EpisodeComponets } from './episode seasons components/episode-components'
 import { Similiar } from './similar component/similar'
+import { PlayMovieComponent } from './play movie component/play-movie-component'
 
 export function MoviePosterComponents({ type, movie }) {
   return (
@@ -17,6 +18,8 @@ export function MoviePosterComponents({ type, movie }) {
       <CreditsComponents type={type} movie={movie} />
 
       <OverviewComponent overview={movie.overview} />
+
+      <PlayMovieComponent type={type} movie={movie} />
 
       {type === 'tv' ? <EpisodeComponets /> : <Similiar />}
     </div>

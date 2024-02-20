@@ -4,6 +4,7 @@ import { getMovieDetails } from '../api/tmdb/tmdb'
 export const useGetMovieDetails = () => {
   const [runtime, setRuntime] = useState(undefined)
   const [genres, setGenres] = useState([])
+  const [homepage, setHomepage] = useState(null)
 
   const loadMovieDetails = async (type, id) => {
     try {
@@ -13,6 +14,8 @@ export const useGetMovieDetails = () => {
 
         const arrayGenres = arrayOfGenres(movieDetails.genres)
         setGenres(arrayGenres)
+
+        movieDetails.homepage.length > 0 && setHomepage(movieDetails.homepage)
         return
       } else if (type === 'movie') {
         const runtimeMovie = convertMinutesToHours(movieDetails.runtime)
@@ -20,6 +23,8 @@ export const useGetMovieDetails = () => {
 
         const arrayGenres = arrayOfGenres(movieDetails.genres)
         setGenres(arrayGenres)
+
+        movieDetails.homepage.length > 0 && setHomepage(movieDetails.homepage)
         return
       }
     } catch (error) {
@@ -43,5 +48,5 @@ export const useGetMovieDetails = () => {
     return `${Math.floor(hours)}h ${Math.round(minutes)}min`
   }
 
-  return { runtime, genres, loadMovieDetails }
+  return { runtime, genres, homepage, loadMovieDetails }
 }

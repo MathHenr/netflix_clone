@@ -14,7 +14,9 @@ export function EpisodeComponets() {
       </div>
 
       <div className="p-px grid grid-cols-3 items-center gap-12 rounded-md">
-        <div className="col-span-1 h-[130px] bg-red-400 cursor-pointer" />
+        <div className="col-span-1 flex items-center justify-center h-[135px] bg-red-400">
+          {/* <img className="w-[280px] h-full bg-gray-500" src="#" alt="" /> */}
+        </div>
         <div className="col-span-2 space-y-3">
           <p className="font-medium">tempo de episodio</p>
           <p>

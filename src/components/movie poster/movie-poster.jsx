@@ -8,14 +8,13 @@ import { MoviePosterComponents } from '../movie poster components/movie-poster-c
 export function MoviePoster({ movie, type, posterPath }) {
   const { trailer, firstTrailer, loadTrailerInfo } = useGetTrailer()
 
-  function handleMovieCard() {
-    loadTrailerInfo(type, movie.id)
-  }
-
   return (
     <Dialog.Root>
       <div className="inline-block w-[250px] p-2">
-        <Dialog.Trigger onClick={handleMovieCard} href="#">
+        <Dialog.Trigger
+          onClick={() => loadTrailerInfo(type, movie.id)}
+          href="#"
+        >
           <img
             className="rounded-sm scale-95 hover:scale-105 duration-300 shadow-sm cursor-pointer "
             src={posterPath + movie.poster_path}
@@ -33,7 +32,7 @@ export function MoviePoster({ movie, type, posterPath }) {
             </Dialog.Close>
           </div>
           <div className="w-full">
-            {trailer ? (
+            {trailer && firstTrailer && (
               <div className="w-full h-[40vh] sm:h-[65vh] flex items-center justify-center shadow-sm">
                 <div className="absolute w-full h-[40vh] sm:h-[66vh] trailer-gradient-top pointer-events-none" />
                 <iframe
@@ -42,7 +41,9 @@ export function MoviePoster({ movie, type, posterPath }) {
                   allow="accelerometer; fullscreen; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;"
                 ></iframe>
               </div>
-            ) : firstTrailer ? (
+            )}
+
+            {firstTrailer && !trailer && (
               <div className="w-full h-[40vh] sm:h-[65vh] flex items-center justify-center shadow-sm">
                 <div className="absolute w-full h-[40vh] sm:h-[66vh] trailer-gradient-top pointer-events-none" />
                 <iframe
@@ -51,7 +52,9 @@ export function MoviePoster({ movie, type, posterPath }) {
                   allow="accelerometer; fullscreen; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;"
                 ></iframe>
               </div>
-            ) : (
+            )}
+
+            {!firstTrailer && !trailer && (
               <div className="w-full h-full flex items-center justify-center relative">
                 <div className="absolute w-full h-full backdrop-path-gradient-top" />
                 <img

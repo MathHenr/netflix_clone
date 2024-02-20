@@ -1,7 +1,7 @@
 export function Footer() {
   return (
     <footer className="my-12">
-      <div className="pt-20 flex flex-col items-center gap-3">
+      <div className="pt-3 flex flex-col items-center gap-3">
         <h3>Built with passion and love</h3>
         <p>
           All rigths by{' '}

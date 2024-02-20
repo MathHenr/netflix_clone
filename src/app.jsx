@@ -25,7 +25,7 @@ export function App() {
         Video Princiapl aqui
       </div>
 
-      <div className="-my-28 flex flex-col gap-6">
+      <div className="-mt-28 flex flex-col gap-6">
         {itemsList &&
           itemsList.map((item, index) => (
             <CategorySection key={index} item={item} posterPath={image_url} />

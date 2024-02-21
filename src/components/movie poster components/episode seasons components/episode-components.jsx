@@ -54,7 +54,7 @@ export function EpisodeComponets({ runtime, movieData }) {
   }
 
   return (
-    <div className="col-span-3 space-y-6">
+    <div className="col-span-3 space-y-6 py-4 border-y-2 border-b-zinc-400">
       <div className="col-span-3 flex items-center justify-between">
         <h1 className="text-[28px] font-medium">
           Episódios da Temporada {episodes && episodes.season_number}{' '}
@@ -101,7 +101,7 @@ export function EpisodeComponets({ runtime, movieData }) {
             key={index}
             className="transition-all duration-300 p-2 grid grid-cols-3 items-center gap-12 rounded-md group hover:bg-zinc-800"
           >
-            <div className="col-span-1 flex items-center justify-center h-[170px]">
+            <div className="col-span-1 h-[170px] pl-2 flex items-center justify-center">
               <img
                 className="h-full rounded-sm duration-200 group-hover:scale-105"
                 src={backdrop_url + episode.still_path}
@@ -109,7 +109,12 @@ export function EpisodeComponets({ runtime, movieData }) {
               />
             </div>
             <div className="col-span-2 space-y-2">
-              <h3 className="font-medium text-[18px]"> {episode.name} </h3>
+              <h3 className="font-medium text-[18px]">
+                {episode.episode_number >= 10
+                  ? episode.episode_number
+                  : '0' + episode.episode_number}{' '}
+                - {episode.name}
+              </h3>
               <p>
                 {' '}
                 {episode.runtime > 60

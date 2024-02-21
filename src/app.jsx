@@ -21,8 +21,24 @@ export function App() {
     <div>
       <Navbar />
 
-      <div className="w-full h-[95vh] text-[100px] flex items-center justify-center bg-gray-500">
-        Video Princiapl aqui
+      <div className="relative w-full h-[95vh] flex items-center justify-center bg-gray-500">
+        <div className="w-full h-[100%] bg-green-500/30"></div>
+
+        <div className="absolute p-2 max-w-[800px] flex flex-col bg-red-500 left-[7%] bottom-[30%]">
+          <h2 className="text-6xl font-medium pointer-events-none">Título</h2>
+
+          <div className="flex space-x-3 my-3">
+            <span>Ano de lançamento</span>
+            <span>Temporadas ou Horas de Filme</span>
+          </div>
+
+          <p className="text-base">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus
+            officiis non molestias consequatur ab, corrupti libero sint rem
+            architecto aut maiores illo nemo, labore iste atque molestiae eum
+            doloremque modi?
+          </p>
+        </div>
       </div>
 
       <div className="-mt-28 flex flex-col gap-6">

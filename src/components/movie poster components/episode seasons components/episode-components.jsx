@@ -1,32 +1,102 @@
-export function EpisodeComponets() {
+import { useEffect, useState } from 'react'
+import { useMovie } from '../../../hooks/useMovie'
+import { backdrop_url } from '../../../api/tmdb/tmdb'
+
+export function EpisodeComponets({ runtime, movieData }) {
+  const { getEpisodesForEachSeason, getSeason } = useMovie()
+
+  const [options, setOptions] = useState()
+  const [episodesForSeason, setEpisodesForSeason] = useState([])
+  const [episodes, setEpisodes] = useState()
+
+  useEffect(() => {
+    async function createOptionArray() {
+      const arr = new Array(runtime).fill(null)
+      setOptions(arr)
+
+      movieData &&
+        setEpisodesForSeason(getEpisodesForEachSeason(movieData.seasons))
+
+      movieData && setEpisodes(await getSeason(movieData.id, 1))
+    }
+    createOptionArray()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [movieData, runtime])
+
+  async function handleSeason(chosenSeason) {
+    const seasonTarget = movieData.seasons.filter((season) => {
+      return Number(chosenSeason) === season.season_number
+    })
+    setEpisodes(await getSeason(movieData.id, seasonTarget[0].season_number))
+    return
+  }
+
+  function convertMinutesToHours(minutesRuntime) {
+    const hours = minutesRuntime / 60
+    const minutes = (hours - Math.floor(hours)) * 60
+    return `${Math.floor(hours)}h ${Math.round(minutes)}min`
+  }
+
   return (
     <div className="col-span-3 space-y-6">
-      <div className="col-span-3 flex items-center justify-between px-2">
-        <h1 className="text-[28px] font-medium">Episódios</h1>
+      <div className="col-span-3 flex items-center justify-between">
+        <h1 className="text-[28px] font-medium">
+          Episódios da Temporada {episodes && episodes.season_number}{' '}
+        </h1>
         <select
-          onChange={(e) => console.log(e.target.value)}
-          className="text-zinc-950 outline-none px-2 py-px rounded-sm"
+          onChange={(e) => handleSeason(e.target.value)}
+          className="text-zinc-50 outline-none p-2 rounded-md bg-zinc-600"
         >
-          <option value="temporada1">Temporada 1</option>
-          <option value="temporada2">Temporada 2</option>
-          <option value="temporada3">Temporada 3</option>
+          {options &&
+            options.map((option, index) => (
+              <option
+                className="text-base font-medium"
+                key={index}
+                value={index + 1}
+              >
+                Temporada {index + 1}
+                {' | '}
+                {episodesForSeason && episodesForSeason[0] !== null
+                  ? episodesForSeason[index]
+                  : episodesForSeason[0] === null
+                    ? episodesForSeason[index + 1]
+                    : null}{' '}
+                episódios
+              </option>
+            ))}
         </select>
       </div>
 
-      <div className="p-px grid grid-cols-3 items-center gap-12 rounded-md">
-        <div className="col-span-1 flex items-center justify-center h-[135px] bg-red-400">
-          {/* <img className="w-[280px] h-full bg-gray-500" src="#" alt="" /> */}
-        </div>
-        <div className="col-span-2 space-y-3">
-          <p className="font-medium">tempo de episodio</p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
-            ratione dolorum, necessitatibus veniam exercitationem vel pariatur
-            eligendi itaque quis laboriosam harum corporis delectus sunt
-            provident reiciendis corrupti commodi amet libero.
-          </p>
-        </div>
-      </div>
+      {!episodes && (
+        <p className="my-12 flex items-center justify-center text-red-600 font-medium text-[20px]">
+          Algo ocorreu errado, tente novamente mais tarde.
+        </p>
+      )}
+      {episodes &&
+        episodes.episodes.map((episode, index) => (
+          <div
+            key={index}
+            className="p-2 grid grid-cols-3 items-center gap-12 rounded-md duration-300 group hover:bg-zinc-800"
+          >
+            <div className="col-span-1 flex items-center justify-center h-[170px]">
+              <img
+                className="h-full rounded-sm duration-200 group-hover:scale-105"
+                src={backdrop_url + episode.still_path}
+                alt=""
+              />
+            </div>
+            <div className="col-span-2 space-y-2">
+              <h3 className="font-medium text-[18px]"> {episode.name} </h3>
+              <p>
+                {' '}
+                {episode.runtime > 60
+                  ? convertMinutesToHours(episode.runtime)
+                  : episode.runtime + ' min'}
+              </p>
+              <p className="pr-2">{episode.overview}</p>
+            </div>
+          </div>
+        ))}
     </div>
   )
 }

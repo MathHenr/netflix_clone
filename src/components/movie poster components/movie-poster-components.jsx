@@ -10,7 +10,14 @@ import { useMovie } from '../../hooks/useMovie'
 import { useEffect } from 'react'
 
 export function MoviePosterComponents({ type, movie }) {
-  const { runtime, genres, cast, homepage, getMovie } = useMovie()
+  const {
+    movie: movieData,
+    runtime,
+    genres,
+    cast,
+    homepage,
+    getMovie,
+  } = useMovie()
 
   useEffect(() => {
     async function load() {
@@ -36,7 +43,7 @@ export function MoviePosterComponents({ type, movie }) {
       <PlayMovieComponent homepage={homepage} type={type} movie={movie} />
 
       {type === 'tv' ? (
-        <EpisodeComponets type={type} movie={movie} />
+        <EpisodeComponets runtime={runtime} movieData={movieData} />
       ) : (
         <Similiar />
       )}

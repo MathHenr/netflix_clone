@@ -194,3 +194,16 @@ export const getCastDetails = async (type, id) => {
       return null
   }
 }
+
+export const getSeasonDetail = async (id, season) => {
+  try {
+    const seasonData = await fetchMovie(
+      // eslint-disable-next-line prettier/prettier
+      `/tv/${id}/season/${season}?language=pt-br&api_key=${api_key}`
+    )
+    return seasonData
+  } catch (error) {
+    console.log(new Error())
+    return null
+  }
+}

@@ -1,5 +1,9 @@
 // api functions
-import { getMovieDetails, getCastDetails } from '../api/tmdb/tmdb'
+import {
+  getMovieDetails,
+  getCastDetails,
+  getSeasonDetail,
+} from '../api/tmdb/tmdb'
 
 export function useFetchMovie() {
   const loadMovieData = async (type, id) => {
@@ -21,5 +25,16 @@ export function useFetchMovie() {
       return null
     }
   }
-  return { loadMovieData, loadCastData }
+
+  const loadSeasonData = async (id, season) => {
+    try {
+      const seasonData = await getSeasonDetail(id, season)
+      return seasonData
+    } catch (error) {
+      console.log(new Error())
+      return null
+    }
+  }
+
+  return { loadMovieData, loadCastData, loadSeasonData }
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useFetchMovie } from './useFetchMovie'
 
 export const useMovie = () => {
-  const { loadMovieData, loadCastData } = useFetchMovie()
+  const { loadMovieData, loadCastData, loadSeasonData } = useFetchMovie()
 
   const [movie, setMovie] = useState(null)
   const [type, setType] = useState(null)
@@ -37,6 +37,17 @@ export const useMovie = () => {
       setMovie(movieData)
     } catch (error) {
       console.log(error.message)
+      return null
+    }
+  }
+
+  // Getting season details
+  const getSeason = async (id, season) => {
+    try {
+      const seasonData = await loadSeasonData(id, season)
+      return seasonData
+    } catch (error) {
+      console.log(new Error())
       return null
     }
   }
@@ -115,5 +126,26 @@ export const useMovie = () => {
     return
   }
 
-  return { runtime, genres, homepage, cast, getMovie }
+  // Getting number of episodes for each season
+  const getEpisodesForEachSeason = (seasons) => {
+    const numberOfEpisodes = []
+    for (const season in seasons) {
+      if (!seasons[season].air_date) continue
+      seasons[season].season_number !== 0
+        ? (numberOfEpisodes[season] = seasons[season].episode_count)
+        : (numberOfEpisodes[season] = null)
+    }
+    return numberOfEpisodes
+  }
+
+  return {
+    movie,
+    runtime,
+    genres,
+    homepage,
+    cast,
+    getMovie,
+    getSeason,
+    getEpisodesForEachSeason,
+  }
 }

@@ -36,10 +36,14 @@ export function EpisodeComponets({ runtime, movieData }) {
   }, [movieData, runtime])
 
   async function handleSeason(chosenSeason) {
+    setLoading(true)
+
     const seasonTarget = movieData.seasons.filter((season) => {
       return Number(chosenSeason) === season.season_number
     })
     setEpisodes(await getSeason(movieData.id, seasonTarget[0].season_number))
+
+    setLoading(false)
     return
   }
 
@@ -95,7 +99,7 @@ export function EpisodeComponets({ runtime, movieData }) {
         episodes.episodes.map((episode, index) => (
           <div
             key={index}
-            className="p-2 grid grid-cols-3 items-center gap-12 rounded-md duration-300 group hover:bg-zinc-800"
+            className="transition-all duration-300 p-2 grid grid-cols-3 items-center gap-12 rounded-md group hover:bg-zinc-800"
           >
             <div className="col-span-1 flex items-center justify-center h-[170px]">
               <img

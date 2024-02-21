@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useMovie } from '../../../hooks/useMovie'
+
+// Import variables
 import { backdrop_url } from '../../../api/tmdb/tmdb'
+
+// import components
+import { Loading } from '../../loading/Loading'
 
 export function EpisodeComponets({ runtime, movieData }) {
   const { getEpisodesForEachSeason, getSeason } = useMovie()
@@ -8,9 +13,12 @@ export function EpisodeComponets({ runtime, movieData }) {
   const [options, setOptions] = useState()
   const [episodesForSeason, setEpisodesForSeason] = useState([])
   const [episodes, setEpisodes] = useState()
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     async function createOptionArray() {
+      setLoading(true)
+
       const arr = new Array(runtime).fill(null)
       setOptions(arr)
 
@@ -18,6 +26,10 @@ export function EpisodeComponets({ runtime, movieData }) {
         setEpisodesForSeason(getEpisodesForEachSeason(movieData.seasons))
 
       movieData && setEpisodes(await getSeason(movieData.id, 1))
+
+      setTimeout(() => {
+        setLoading(false)
+      }, 1000)
     }
     createOptionArray()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -67,12 +79,19 @@ export function EpisodeComponets({ runtime, movieData }) {
         </select>
       </div>
 
-      {!episodes && (
+      {loading && (
+        <div className="w-full flex items-center justify-center p-2 h-20">
+          <Loading />
+        </div>
+      )}
+
+      {!loading && !episodes && (
         <p className="my-12 flex items-center justify-center text-red-600 font-medium text-[20px]">
           Algo ocorreu errado, tente novamente mais tarde.
         </p>
       )}
-      {episodes &&
+      {!loading &&
+        episodes &&
         episodes.episodes.map((episode, index) => (
           <div
             key={index}

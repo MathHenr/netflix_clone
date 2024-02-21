@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { getTrailerData } from '../api/tmdb/tmdb'
 
-export const useGetTrailer = () => {
+export const useTrailer = () => {
   const [trailer, setTrailer] = useState(null)
   const [firstTrailer, setFirstTrailer] = useState(null)
 

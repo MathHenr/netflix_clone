@@ -1,13 +1,13 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
-import { useGetTrailer } from '../../hooks/useGetTrailer'
+import { useTrailer } from '../../hooks/useTrailer'
 import { backdrop_url } from '../../api/tmdb/tmdb'
 
 import { MoviePosterComponents } from '../movie poster components/movie-poster-components'
 import { useEffect } from 'react'
 
 export function MoviePoster({ movie, type, posterPath }) {
-  const { trailer, firstTrailer, loadTrailerInfo } = useGetTrailer()
+  const { trailer, firstTrailer, loadTrailerInfo } = useTrailer()
 
   useEffect(() => {
     async function load() {

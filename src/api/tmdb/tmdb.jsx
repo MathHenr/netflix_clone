@@ -203,7 +203,36 @@ export const getSeasonDetail = async (id, season) => {
     )
     return seasonData
   } catch (error) {
-    console.log(new Error())
+    console.log(error.message)
     return null
+  }
+}
+
+export const getSimilarTitleDetails = async (type, id) => {
+  switch (type) {
+    case 'tv':
+      try {
+        const similar = await fetchMovie(
+          // eslint-disable-next-line prettier/prettier
+          `/tv/${id}/similar?language=pt-br&api_key=${api_key}`
+        )
+        return similar
+      } catch (error) {
+        console.log(error.message)
+        break
+      }
+    case 'movie':
+      try {
+        const similar = await fetchMovie(
+          // eslint-disable-next-line prettier/prettier
+          `/movie/${id}/similar?language=pt-br&api_key=${api_key}`
+        )
+        return similar
+      } catch (error) {
+        console.log(error.message)
+        break
+      }
+    default:
+      break
   }
 }

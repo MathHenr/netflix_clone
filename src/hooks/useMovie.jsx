@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import { useFetchMovie } from './useFetchMovie'
 
 export const useMovie = () => {
-  const { loadMovieData, loadCastData, loadSeasonData } = useFetchMovie()
+  const { loadMovieData, loadCastData, loadSeasonData, loadSimilarTitleData } =
+    useFetchMovie()
 
   const [movie, setMovie] = useState(null)
   const [type, setType] = useState(null)
@@ -10,6 +11,7 @@ export const useMovie = () => {
   const [genres, setGenres] = useState([])
   const [cast, setCast] = useState([])
   const [homepage, setHomepage] = useState(null)
+  const [similars, setSimilars] = useState([])
 
   useEffect(() => {
     function load() {
@@ -22,6 +24,8 @@ export const useMovie = () => {
       getCasters(cast)
 
       getHomepage()
+
+      getSimilar(type, movie.id, 3)
     }
     load()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -47,9 +51,31 @@ export const useMovie = () => {
       const seasonData = await loadSeasonData(id, season)
       return seasonData
     } catch (error) {
-      console.log(new Error())
+      console.log(error.message)
       return null
     }
+  }
+
+  // Getting Similar titles
+  const getSimilar = async (type, id, number) => {
+    try {
+      const similar = await loadSimilarTitleData(type, id)
+      setSimilars(getRandomSimilars(similar, number))
+      return
+    } catch (error) {
+      console.log(error.message)
+      return null
+    }
+  }
+
+  function getRandomSimilars(objSimilar, numberOfChosen) {
+    const chosens = []
+    for (let n = 0; n < numberOfChosen; n++) {
+      const random = Math.floor(Math.random() * objSimilar.length)
+      chosens[n] = objSimilar[random]
+      delete objSimilar[random]
+    }
+    return chosens
   }
 
   // Getting genres
@@ -144,6 +170,7 @@ export const useMovie = () => {
     genres,
     homepage,
     cast,
+    similars,
     getMovie,
     getSeason,
     getEpisodesForEachSeason,

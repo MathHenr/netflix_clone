@@ -2,7 +2,7 @@ import { OverviewComponent } from './overview-component/overview-component'
 import { TimeStampComponent } from './timestamp-component/timestamp-component'
 import { CreditsComponents } from './credits-components/credits-components'
 import { EpisodeComponets } from './episode seasons components/episode-components'
-import { Similiar } from './similar component/similar'
+import { SimiliarComponent } from './similar component/similar-component'
 import { PlayMovieComponent } from './play movie component/play-movie-component'
 
 // import hooks
@@ -16,6 +16,7 @@ export function MoviePosterComponents({ type, movie }) {
     genres,
     cast,
     homepage,
+    similars,
     getMovie,
   } = useMovie()
 
@@ -42,11 +43,14 @@ export function MoviePosterComponents({ type, movie }) {
 
       <PlayMovieComponent homepage={homepage} type={type} movie={movie} />
 
-      {type === 'tv' ? (
+      {type === 'tv' && (
         <EpisodeComponets runtime={runtime} movieData={movieData} />
-      ) : (
-        <Similiar />
       )}
+
+      <SimiliarComponent
+        title={type === 'tv' ? movie.name : movie.title}
+        similars={similars}
+      />
     </div>
   )
 }

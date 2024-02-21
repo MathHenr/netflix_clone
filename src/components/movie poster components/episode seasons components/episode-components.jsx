@@ -54,8 +54,8 @@ export function EpisodeComponets({ runtime, movieData }) {
   }
 
   return (
-    <div className="col-span-3 space-y-6 py-4 border-y-2 border-b-zinc-400">
-      <div className="col-span-3 flex items-center justify-between">
+    <div className="col-span-3 space-y-6 py-4 border-b-2 border-zinc-400">
+      <div className="col-span-3 flex items-center justify-between border-b-2 border-zinc-400 pb-4">
         <h1 className="text-[28px] font-medium">
           Episódios da Temporada {episodes && episodes.season_number}{' '}
         </h1>

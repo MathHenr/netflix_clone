@@ -3,6 +3,7 @@ import {
   getMovieDetails,
   getCastDetails,
   getSeasonDetail,
+  getSimilarTitleDetails,
 } from '../api/tmdb/tmdb'
 
 export function useFetchMovie() {
@@ -36,5 +37,15 @@ export function useFetchMovie() {
     }
   }
 
-  return { loadMovieData, loadCastData, loadSeasonData }
+  const loadSimilarTitleData = async (type, id) => {
+    try {
+      const similar = await getSimilarTitleDetails(type, id)
+      return similar.results
+    } catch (error) {
+      console.log(new Error())
+      return null
+    }
+  }
+
+  return { loadMovieData, loadCastData, loadSeasonData, loadSimilarTitleData }
 }

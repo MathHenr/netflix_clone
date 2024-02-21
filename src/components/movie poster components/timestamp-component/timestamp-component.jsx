@@ -1,17 +1,4 @@
-import { useEffect } from 'react'
-import { useMovie } from '../../../hooks/useMovie'
-
-export function TimeStampComponent({ type, movie }) {
-  const { runtime, getMovie } = useMovie()
-
-  useEffect(() => {
-    const loadRuntime = async () => {
-      await getMovie(type, movie.id)
-    }
-    loadRuntime()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [type, movie])
-
+export function TimeStampComponent({ type, runtime, movie }) {
   return (
     <div className="flex items-center space-x-3 col-span-2">
       <p className="font-semibold">

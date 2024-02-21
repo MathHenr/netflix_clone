@@ -129,11 +129,6 @@ const getTrailer = (trailerData) => {
   if (!trailerData.results || Object.keys(trailerData.results).length === 0)
     return
   const getOfficialItems = trailerData.results.filter((item) => {
-    if (
-      item.id === '64ce9d2a4d679100c52c1930' ||
-      item.id === '64ce9d14549dda0139328b2f'
-    )
-      return
     return (
       item.official === true &&
       (item.type === 'Trailer' || item.type === 'Teaser')

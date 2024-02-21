@@ -1,18 +1,4 @@
-import { useEffect } from 'react'
-import { useMovie } from '../../../hooks/useMovie'
-
-export function CreditsComponents({ type, movie }) {
-  const { genres, cast, getMovie } = useMovie()
-
-  // getting 4 casters and genres
-  useEffect(() => {
-    async function load() {
-      await getMovie(type, movie.id)
-    }
-    load()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [movie, type])
-
+export function CreditsComponents({ genres, cast }) {
   return (
     <div className="col-span-1 row-span-2 flex flex-col items-start space-y-2  px-2">
       {cast && cast.length > 1 && (

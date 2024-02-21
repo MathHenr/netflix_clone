@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react'
-import { useMovie } from '../../../hooks/useMovie'
 
 import { Play, Plus } from 'lucide-react'
 
-export function PlayMovieComponent({ type, movie }) {
-  const { homepage, getMovie } = useMovie()
+export function PlayMovieComponent({ homepage, type, movie }) {
   const [title, setTitle] = useState('')
 
   useEffect(() => {
-    async function load() {
-      await getMovie(type, movie.id)
+    function load() {
       type === 'tv' ? setTitle(movie.name) : setTitle(movie.title)
       return
     }

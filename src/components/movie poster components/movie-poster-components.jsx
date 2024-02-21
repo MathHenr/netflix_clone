@@ -5,7 +5,21 @@ import { EpisodeComponets } from './episode seasons components/episode-component
 import { Similiar } from './similar component/similar'
 import { PlayMovieComponent } from './play movie component/play-movie-component'
 
+// import hooks
+import { useMovie } from '../../hooks/useMovie'
+import { useEffect } from 'react'
+
 export function MoviePosterComponents({ type, movie }) {
+  const { runtime, genres, cast, homepage, getMovie } = useMovie()
+
+  useEffect(() => {
+    async function load() {
+      await getMovie(type, movie.id)
+    }
+    load()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [type, movie])
+
   return (
     <div className="my-12 space-y-3 px-5 grid grid-cols-3 gap-3">
       <h1 className="text-slate-50 text-[28px] font-bold col-span-3">
@@ -13,15 +27,19 @@ export function MoviePosterComponents({ type, movie }) {
       </h1>
 
       {/* Timestamp component to show when the movie/tv where released */}
-      <TimeStampComponent type={type} movie={movie} />
+      <TimeStampComponent type={type} runtime={runtime} movie={movie} />
 
-      <CreditsComponents type={type} movie={movie} />
+      <CreditsComponents genres={genres} cast={cast} />
 
       <OverviewComponent overview={movie.overview} />
 
-      <PlayMovieComponent type={type} movie={movie} />
+      <PlayMovieComponent homepage={homepage} type={type} movie={movie} />
 
-      {type === 'tv' ? <EpisodeComponets /> : <Similiar />}
+      {type === 'tv' ? (
+        <EpisodeComponets type={type} movie={movie} />
+      ) : (
+        <Similiar />
+      )}
     </div>
   )
 }

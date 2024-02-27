@@ -11,5 +11,8 @@
     background: rgb(24,24,27);
     background: linear-gradient(0deg, rgba(24,24,27,1) 0%, rgba(24,24,27,.97) 4%, rgba(24,24,27,.3) 15%, rgba(24,24,27,0) 100%);
   }
-
+  .header-gradient-top {
+    background: rgb(24,24,27);
+    background: linear-gradient(0deg, rgba(24,24,27,1) 0%, rgba(24,24,27,.97) 4%, rgba(24,24,27,.5) 15%, rgba(24,24,27,.3) 20%, rgba(24,24,27,0) 100%);
+  }
 }

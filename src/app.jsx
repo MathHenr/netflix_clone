@@ -5,41 +5,28 @@ import { getMovieList, image_url } from './api/tmdb/tmdb'
 import { CategorySection } from './components/category/category-section'
 import { Navbar } from './components/navbar/navbar'
 import { Footer } from './components/footer/footer'
+import { MovieHeader } from './components/header/movie-header'
 
 export function App() {
   const [itemsList, setItemsList] = useState([])
+  const [movieHeader, setMovieHeader] = useState(null)
 
   useEffect(() => {
     async function loadMovieData() {
       const list = await getMovieList()
       setItemsList(list)
+      const number = Math.floor(Math.random() * list[0].items.results.length)
+      setMovieHeader(list[0].items.results[number])
     }
     loadMovieData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <div>
       <Navbar />
 
-      <div className="relative w-full h-[95vh] flex items-center justify-center bg-gray-500">
-        <div className="w-full h-[100%] bg-green-500/30"></div>
-
-        <div className="absolute p-2 max-w-[800px] flex flex-col bg-red-500 left-[7%] bottom-[30%]">
-          <h2 className="text-6xl font-medium pointer-events-none">Título</h2>
-
-          <div className="flex space-x-3 my-3">
-            <span>Ano de lançamento</span>
-            <span>Temporadas ou Horas de Filme</span>
-          </div>
-
-          <p className="text-base">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus
-            officiis non molestias consequatur ab, corrupti libero sint rem
-            architecto aut maiores illo nemo, labore iste atque molestiae eum
-            doloremque modi?
-          </p>
-        </div>
-      </div>
+      {movieHeader && <MovieHeader movie={movieHeader} />}
 
       <div className="-mt-28 flex flex-col gap-6">
         {itemsList &&
